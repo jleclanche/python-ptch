@@ -13,6 +13,8 @@ except ImportError:
 	from cStringIO import StringIO
 from struct import unpack
 
+__version__ = "1.0"
+
 
 def xsign(i):
 	"""
