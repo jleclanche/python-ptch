@@ -7,10 +7,7 @@ The original BSDIFF40 format is compressed with bzip2 instead of RLE.
 
 from binascii import hexlify
 from hashlib import md5
-try:
-	from io import StringIO
-except ImportError:
-	from cStringIO import StringIO
+from io import StringIO
 from struct import unpack
 
 __version__ = "1.0"
