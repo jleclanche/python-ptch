@@ -29,7 +29,7 @@ class PatchFile(object):
 		# Parse the header
 		if isinstance(file, str):
 			file = open(file, "rb")
-		assert file.read(4) == "PTCH" # Magic
+		assert file.read(4) == "PTCH"  # Magic
 
 		##
 		# Sizes
@@ -54,7 +54,7 @@ class PatchFile(object):
 		# - unpackedSize: Unpacked size of the patch data
 		assert file.read(4) == "XFRM"
 		self.xfrmBlockSize, = unpack("i", file.read(4))
-		assert file.read(4) in ("BSD0", "COPY") # patch type?
+		assert file.read(4) in ("BSD0", "COPY")  # patch type?
 		self.unpackedSize, = unpack("i", file.read(4))
 
 		self.compressedDiff = file.read()
@@ -68,10 +68,10 @@ class PatchFile(object):
 	def __bsdiffParseHeader(self, diff):
 		"""
 		The BSDIFF header is as follows:
-		 - 8 bytes magic "BSDIFF40"
-		 - 8 bytes control block size
-		 - 8 bytes diff block size
-		 - 8 bytes new file size
+		- 8 bytes magic "BSDIFF40"
+		- 8 bytes control block size
+		- 8 bytes diff block size
+		- 8 bytes new file size
 		We read all this and make sure it's all valid.
 		"""
 		assert diff.read(8) == "BSDIFF40"
@@ -79,7 +79,6 @@ class PatchFile(object):
 		assert ctrlBlockSize > 0 and diffBlockSize > 0
 		assert sizeAfter == self.sizeAfter
 		return ctrlBlockSize, diffBlockSize, sizeAfter
-
 
 	def bsdiffParse(self):
 		diff = StringIO(self.rleUnpack())
@@ -114,7 +113,7 @@ class PatchFile(object):
 				ret.append(data.read(count))
 
 			else:
-				ret.append("\0" * (byte+1))
+				ret.append("\0" * (byte + 1))
 
 			byte = data.read(1)
 
